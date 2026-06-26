@@ -44,7 +44,16 @@
     <script>function playaudio (){
       var audio = document.getElementById("opening");
       if (audio) audio.play();
-    }</script>
+    }
+    // Reload on resize so game scales to new viewport
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        window.location.reload();
+      }, 300);
+    });
+    </script>
     </head>
   <body onload="playaudio()">
     <audio id="opening" hidden="true">

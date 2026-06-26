@@ -32,8 +32,8 @@ class Text {
     }
 
     // Position: highscore top, score below it (below title banner)
-    hiScore.style.top = `${Math.floor(55 * SCALE)}px`;
-    div.style.top = `${Math.floor(78 * SCALE)}px`;
+    hiScore.style.top = `${Math.floor(70 * SCALE)}px`;
+    div.style.top = `${Math.floor(95 * SCALE)}px`;
   }
 
   update(txt) {
