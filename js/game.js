@@ -134,7 +134,9 @@
 
   // --- Player helpers ---
   function playerX() {
-    return player.col * COL_W;
+    // Center the player within their column, but clamp to game bounds
+    const raw = player.col * COL_W + (COL_W - PLAYER_W) / 2;
+    return Math.max(0, Math.min(raw, GAME_W - PLAYER_W));
   }
 
   function moveLeft() {
@@ -218,7 +220,7 @@
     if (state === 'playing') updateSnow();
 
     // Player (DOM element for GIF animation)
-    const px = playerX() + (COL_W - PLAYER_W) / 2;
+    const px = playerX();
     playerEl.style.left = px + 'px';
     playerEl.style.top = PLAYER_Y + 'px';
     if (state === 'dead') {
@@ -247,15 +249,18 @@
     if (state === 'playing' || state === 'dead') {
       ctx.textAlign = 'left';
       ctx.font = `${IS_MOBILE ? 600 : 700} ${FONT_SIZE_SCORE}px 'Work Sans', sans-serif`;
+      const scoreX = Math.floor(8 * SCALE);
       const scoreY = bannerH + Math.floor(20 * SCALE);
+      const scoreBoxW = Math.min(Math.floor(120 * SCALE), GAME_W - scoreX * 2);
+      const scoreBoxH = Math.floor(FONT_SIZE_SCORE * 2.8);
       ctx.fillStyle = '#568FB0';
-      ctx.fillRect(Math.floor(5 * SCALE), scoreY - FONT_SIZE_SCORE, Math.floor(120 * SCALE), Math.floor(FONT_SIZE_SCORE * 2.8));
+      ctx.fillRect(scoreX, scoreY - FONT_SIZE_SCORE, scoreBoxW, scoreBoxH);
       ctx.strokeStyle = 'white';
       ctx.lineWidth = 2;
-      ctx.strokeRect(Math.floor(5 * SCALE), scoreY - FONT_SIZE_SCORE, Math.floor(120 * SCALE), Math.floor(FONT_SIZE_SCORE * 2.8));
+      ctx.strokeRect(scoreX, scoreY - FONT_SIZE_SCORE, scoreBoxW, scoreBoxH);
       ctx.fillStyle = 'white';
-      ctx.fillText(`SCORE: ${score}`, Math.floor(10 * SCALE), scoreY);
-      ctx.fillText(`HIGHSCORE: ${hiScore}`, Math.floor(10 * SCALE), scoreY + FONT_SIZE_SCORE + 4);
+      ctx.fillText(`SCORE: ${score}`, scoreX + Math.floor(4 * SCALE), scoreY);
+      ctx.fillText(`HIGHSCORE: ${hiScore}`, scoreX + Math.floor(4 * SCALE), scoreY + FONT_SIZE_SCORE + 4);
     }
   }
 
