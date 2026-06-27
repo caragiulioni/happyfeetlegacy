@@ -4,7 +4,7 @@
     <title>Happy Feet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@600;800&display=swap" rel="stylesheet">
     <link rel="icon" href="images/favicon.png" type="image/x-icon" />
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,7 +12,7 @@
         height: 100%;
         overflow: hidden;
         background-color: #a8c8d8;
-        background-image: 
+        background-image:
           radial-gradient(circle at 15% 15%, rgba(255,255,255,0.4) 1px, transparent 1px),
           radial-gradient(circle at 45% 10%, rgba(255,255,255,0.3) 2px, transparent 2px),
           radial-gradient(circle at 75% 20%, rgba(255,255,255,0.35) 1.5px, transparent 1.5px),
@@ -22,12 +22,7 @@
           radial-gradient(circle at 10% 75%, rgba(255,255,255,0.35) 2px, transparent 2px),
           radial-gradient(circle at 50% 80%, rgba(255,255,255,0.4) 1.5px, transparent 1.5px),
           radial-gradient(circle at 85% 85%, rgba(255,255,255,0.3) 1px, transparent 1px),
-          radial-gradient(circle at 35% 90%, rgba(255,255,255,0.25) 2px, transparent 2px),
-          radial-gradient(circle at 70% 70%, rgba(255,255,255,0.35) 1.5px, transparent 1.5px),
-          radial-gradient(circle at 5% 40%, rgba(255,255,255,0.3) 1px, transparent 1px),
-          radial-gradient(circle at 95% 60%, rgba(255,255,255,0.4) 2px, transparent 2px),
-          radial-gradient(circle at 40% 35%, rgba(255,255,255,0.3) 1.5px, transparent 1.5px),
-          radial-gradient(circle at 65% 95%, rgba(255,255,255,0.35) 1px, transparent 1px);
+          radial-gradient(circle at 35% 90%, rgba(255,255,255,0.25) 2px, transparent 2px);
         background-size: 120px 120px;
         font-family: 'Work Sans', sans-serif;
       }
@@ -36,39 +31,69 @@
         justify-content: center;
         align-items: center;
       }
-      #app {
+      #game-wrapper {
         position: relative;
-        overflow: hidden;
       }
+      canvas {
+        display: block;
+        border-radius: 4px;
+      }
+      #ui-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+        z-index: 100;
+      }
+      #popup {
+        background-color: #568FB0;
+        padding: 20px 30px;
+        border: 5px solid white;
+        border-radius: 5px;
+        text-align: center;
+        pointer-events: auto;
+      }
+      #popup p {
+        color: white;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0 0 15px 0;
+      }
+      #popup button {
+        background-color: #C9D8EB;
+        color: #568FB0;
+        font-size: 18px;
+        font-weight: 700;
+        border: 3px solid white;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 8px 24px;
+        font-family: 'Work Sans', sans-serif;
+      }
+      #popup button:active {
+        transform: scale(0.95);
+      }
+      .hidden { display: none !important; }
     </style>
-    <script>function playaudio (){
-      var audio = document.getElementById("opening");
-      if (audio) audio.play();
-    }
-    // Reload on resize so game scales to new viewport
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function() {
-        window.location.reload();
-      }, 300);
-    });
-    </script>
-    </head>
-  <body onload="playaudio()">
-    <audio id="opening" hidden="true">
-      <source src="./audio/opening.mp3">
-    </audio>
-    <div id="app"></div>
-    <script src="js/data.js"></script>
-    <script src="js/text.js"></script>
-    <script src="js/enemy.js"></script>
-    <script src="js/engine-utilities.js"></script>
-    <script src="js/snow.js"></script>
-    <script src="js/engine.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-    </script>
+  </head>
+  <body>
+    <div id="game-wrapper">
+      <canvas id="game"></canvas>
+      <div id="ui-overlay">
+        <div id="popup">
+          <p id="popup-text">Let's Play!</p>
+          <button id="popup-btn">START</button>
+        </div>
+      </div>
+    </div>
+
+    <audio id="audio-opening" src="audio/opening.mp3" preload="auto"></audio>
+    <audio id="audio-move" src="audio/jump.mp3" preload="auto"></audio>
+    <audio id="audio-hit" src="audio/hit.mp3" preload="auto"></audio>
+    <audio id="audio-theme" src="audio/theme-trimmed.mp3" preload="auto"></audio>
+
+    <script src="js/game.js"></script>
   </body>
 </html>
