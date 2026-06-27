@@ -12,13 +12,17 @@
   // Game must fit within both the viewport height AND width
   const MAX_H = Math.floor(window.innerHeight * (IS_MOBILE ? 0.95 : 0.88));
   const MAX_W = Math.floor(window.innerWidth * 0.95); // leave a little breathing room
-  // Base aspect ratio is 5:6 (width:height)
+  // Base aspect ratio is 5:6 (width:height) but on mobile we stretch taller
   let GAME_W = Math.floor(MAX_H * (5 / 6));
   let GAME_H = MAX_H;
-  // If that width exceeds the screen, constrain by width instead
+  // If that width exceeds the screen, constrain width and use all available height
   if (GAME_W > MAX_W) {
     GAME_W = MAX_W;
-    GAME_H = Math.floor(GAME_W * (6 / 5));
+    GAME_H = Math.min(Math.floor(GAME_W * (6 / 5)), MAX_H);
+    // On mobile, allow taller ratio to use more vertical space
+    if (IS_MOBILE) {
+      GAME_H = MAX_H;
+    }
   }
   const SCALE = GAME_W / 375;
 
