@@ -8,8 +8,18 @@
 
   // --- Config ---
   const IS_MOBILE = window.innerWidth < 768;
-  const GAME_H = Math.floor(window.innerHeight * 0.88);
-  const GAME_W = Math.floor(GAME_H * (5 / 6));
+
+  // Game must fit within both the viewport height AND width
+  const MAX_H = Math.floor(window.innerHeight * 0.88);
+  const MAX_W = Math.floor(window.innerWidth * 0.95); // leave a little breathing room
+  // Base aspect ratio is 5:6 (width:height)
+  let GAME_W = Math.floor(MAX_H * (5 / 6));
+  let GAME_H = MAX_H;
+  // If that width exceeds the screen, constrain by width instead
+  if (GAME_W > MAX_W) {
+    GAME_W = MAX_W;
+    GAME_H = Math.floor(GAME_W * (6 / 5));
+  }
   const SCALE = GAME_W / 375;
 
   const COLS = 5;
