@@ -10,7 +10,7 @@
   const IS_MOBILE = window.innerWidth < 768;
 
   // Game must fit within both the viewport height AND width
-  const MAX_H = Math.floor(window.innerHeight * 0.88);
+  const MAX_H = Math.floor(window.innerHeight * (IS_MOBILE ? 0.95 : 0.88));
   const MAX_W = Math.floor(window.innerWidth * 0.95); // leave a little breathing room
   // Base aspect ratio is 5:6 (width:height)
   let GAME_W = Math.floor(MAX_H * (5 / 6));
@@ -31,7 +31,7 @@
 
   const PLAYER_W = Math.floor((IS_MOBILE ? 80 : 75) * SCALE);
   const PLAYER_H = Math.floor((IS_MOBILE ? 80 : 54) * SCALE);
-  const PLAYER_Y = GAME_H - PLAYER_H - Math.floor(90 * SCALE);
+  const PLAYER_Y = GAME_H - PLAYER_H - Math.floor((IS_MOBILE ? 40 : 90) * SCALE);
   const HIT_PADDING = Math.floor(15 * SCALE);
 
   const FONT_SIZE_TITLE = Math.floor(28 * SCALE * (IS_MOBILE ? 0.85 : 1));
