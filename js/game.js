@@ -25,17 +25,17 @@
   const COLS = 5;
   const COL_W = Math.floor(GAME_W / COLS);
 
-  const ENEMY_W = Math.floor(65 * SCALE * (IS_MOBILE ? 0.75 : 1));
-  const ENEMY_H = Math.floor(70 * SCALE * (IS_MOBILE ? 0.75 : 1));
+  const ENEMY_W = Math.floor(65 * SCALE * (IS_MOBILE ? 1 : 1));
+  const ENEMY_H = Math.floor(70 * SCALE * (IS_MOBILE ? 1 : 1));
   const MAX_ENEMIES = 5;
 
-  const PLAYER_W = Math.floor((IS_MOBILE ? 60 : 75) * SCALE);
-  const PLAYER_H = Math.floor((IS_MOBILE ? 44 : 54) * SCALE);
+  const PLAYER_W = Math.floor((IS_MOBILE ? 80 : 75) * SCALE);
+  const PLAYER_H = Math.floor((IS_MOBILE ? 80 : 54) * SCALE);
   const PLAYER_Y = GAME_H - PLAYER_H - Math.floor(90 * SCALE);
   const HIT_PADDING = Math.floor(15 * SCALE);
 
-  const FONT_SIZE_TITLE = Math.floor(28 * SCALE * (IS_MOBILE ? 0.7 : 1));
-  const FONT_SIZE_SCORE = Math.floor(12 * SCALE * (IS_MOBILE ? 0.7 : 1));
+  const FONT_SIZE_TITLE = Math.floor(28 * SCALE * (IS_MOBILE ? 0.85 : 1));
+  const FONT_SIZE_SCORE = Math.floor(12 * SCALE * (IS_MOBILE ? 1 : 1));
 
   // --- Canvas setup ---
   const canvas = document.getElementById('game');
